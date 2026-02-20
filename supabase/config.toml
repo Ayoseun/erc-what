@@ -1,0 +1,4 @@
+project_id = "ibcoxllaidsfbnhrdhno"
+
+[functions.ai-erc-recommend]
+verify_jwt = false
