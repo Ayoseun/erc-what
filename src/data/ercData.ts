@@ -1,0 +1,425 @@
+export type ERCCategory = 
+  | "Token" 
+  | "NFT" 
+  | "DeFi" 
+  | "Identity" 
+  | "Governance" 
+  | "Storage" 
+  | "Security" 
+  | "Account" 
+  | "Utility"
+  | "Metadata";
+
+export interface ERCData {
+  number: string;
+  title: string;
+  category: ERCCategory;
+  status: "Final" | "Draft" | "Review" | "Living";
+  summary: string;
+  useCases: string[];
+  buildExamples: string[];
+  keyFeatures: string[];
+  relatedERCs?: string[];
+}
+
+export const ercDatabase: ERCData[] = [
+  {
+    number: "20",
+    title: "Token Standard",
+    category: "Token",
+    status: "Final",
+    summary: "The foundational fungible token standard. Defines a common interface for transferable, divisible tokens — the building block of DeFi, payments, and tokenized assets.",
+    useCases: [
+      "Creating a cryptocurrency or utility token",
+      "Building payment systems",
+      "Loyalty and reward points",
+      "Tokenizing real-world assets",
+      "DAO voting tokens",
+      "Stablecoins",
+    ],
+    buildExamples: [
+      "Payment gateway accepting custom tokens",
+      "Loyalty rewards platform for retail brands",
+      "Tokenized real estate shares",
+      "In-game currency for blockchain games",
+    ],
+    keyFeatures: ["Fungible", "Transferable", "Divisible", "Allowance/Approve pattern"],
+    relatedERCs: ["777", "1363", "4626"],
+  },
+  {
+    number: "721",
+    title: "Non-Fungible Token Standard",
+    category: "NFT",
+    status: "Final",
+    summary: "The original NFT standard. Each token is unique and indivisible — perfect for representing ownership of distinct digital or physical items.",
+    useCases: [
+      "Digital art and collectibles",
+      "Real estate tokenization",
+      "Gaming items and characters",
+      "Event tickets",
+      "Domain names",
+      "Certificates and credentials",
+    ],
+    buildExamples: [
+      "NFT marketplace like OpenSea",
+      "Digital art gallery with provenance tracking",
+      "Real estate deed management system",
+      "Event ticketing platform with anti-fraud",
+    ],
+    keyFeatures: ["Non-fungible", "Unique token IDs", "Metadata URI", "Safe transfer"],
+    relatedERCs: ["1155", "2981", "4907"],
+  },
+  {
+    number: "1155",
+    title: "Multi Token Standard",
+    category: "NFT",
+    status: "Final",
+    summary: "A versatile standard supporting both fungible and non-fungible tokens in a single contract. Gas-efficient batch operations make it ideal for games and marketplaces.",
+    useCases: [
+      "Gaming items (weapons, armor, currencies)",
+      "Multi-edition digital collectibles",
+      "Bundle transfers",
+      "Mixed fungible/non-fungible ecosystems",
+    ],
+    buildExamples: [
+      "Blockchain RPG with items and gold",
+      "Trading card game platform",
+      "Digital fashion marketplace",
+      "Multi-asset portfolio manager",
+    ],
+    keyFeatures: ["Multi-token", "Batch transfers", "Gas efficient", "Fungible + Non-fungible"],
+    relatedERCs: ["721", "2981"],
+  },
+  {
+    number: "4626",
+    title: "Tokenized Vault Standard",
+    category: "DeFi",
+    status: "Final",
+    summary: "A standard for yield-bearing vaults. Wraps ERC-20 tokens into share-based vaults for lending, staking, and yield aggregation with composable interfaces.",
+    useCases: [
+      "Yield aggregation protocols",
+      "Lending and borrowing platforms",
+      "Staking pools",
+      "Auto-compounding strategies",
+    ],
+    buildExamples: [
+      "Yield aggregator like Yearn Finance",
+      "Lending platform with interest-bearing deposits",
+      "Staking-as-a-service platform",
+      "DeFi savings account",
+    ],
+    keyFeatures: ["Share-based deposits", "Yield calculation", "ERC-20 compatible", "Composable"],
+    relatedERCs: ["20"],
+  },
+  {
+    number: "2981",
+    title: "NFT Royalty Standard",
+    category: "NFT",
+    status: "Final",
+    summary: "A standardized way to retrieve royalty payment information for NFTs, enabling creators to earn from secondary sales.",
+    useCases: [
+      "Artist royalties on secondary sales",
+      "Music royalty distribution",
+      "Creator economy platforms",
+      "Revenue sharing for collaborative works",
+    ],
+    buildExamples: [
+      "NFT marketplace with automatic royalty distribution",
+      "Music streaming platform with on-chain royalties",
+      "Collaborative art platform with split royalties",
+    ],
+    keyFeatures: ["Royalty info", "Percentage-based", "Marketplace compatible", "Creator-friendly"],
+    relatedERCs: ["721", "1155"],
+  },
+  {
+    number: "777",
+    title: "Token Standard (Advanced)",
+    category: "Token",
+    status: "Final",
+    summary: "An advanced fungible token standard with hooks for send/receive notifications. Backward compatible with ERC-20 while adding operator permissions and richer interactions.",
+    useCases: [
+      "Tokens requiring transfer notifications",
+      "Advanced DeFi protocols",
+      "Tokens with operator permissions",
+      "Subscription-based services",
+    ],
+    buildExamples: [
+      "Subscription service with auto-payment hooks",
+      "DeFi protocol with transfer callbacks",
+      "Token with built-in fee-on-transfer logic",
+    ],
+    keyFeatures: ["Send/Receive hooks", "Operator permissions", "ERC-20 backward compatible", "No approve+transfer"],
+    relatedERCs: ["20", "1820"],
+  },
+  {
+    number: "1363",
+    title: "Payable Token",
+    category: "Token",
+    status: "Final",
+    summary: "Extends ERC-20 to support executing code after transfers and approvals. Allows tokens to trigger smart contract logic in a single transaction.",
+    useCases: [
+      "One-step token payments to contracts",
+      "Token-based crowdfunding",
+      "Automated service payments",
+      "Token-gated access",
+    ],
+    buildExamples: [
+      "Crowdfunding platform with instant contribution processing",
+      "Pay-per-use API service with token payments",
+      "Token-gated content platform",
+    ],
+    keyFeatures: ["Transfer and call", "Single transaction payments", "ERC-20 extension", "Callback support"],
+    relatedERCs: ["20"],
+  },
+  {
+    number: "4907",
+    title: "Rental NFT",
+    category: "NFT",
+    status: "Final",
+    summary: "Adds time-limited user roles to ERC-721. Enables NFT rentals where the 'user' role expires automatically — perfect for subscriptions and temporary access.",
+    useCases: [
+      "NFT rentals and leasing",
+      "Subscription-based access",
+      "Time-limited gaming items",
+      "Temporary membership passes",
+    ],
+    buildExamples: [
+      "NFT rental marketplace",
+      "Subscription service with NFT-based access",
+      "Game item lending platform",
+      "Temporary VIP pass system",
+    ],
+    keyFeatures: ["Time-limited user role", "Auto-expiry", "ERC-721 extension", "Rental support"],
+    relatedERCs: ["721"],
+  },
+  {
+    number: "6551",
+    title: "Token Bound Accounts",
+    category: "Account",
+    status: "Final",
+    summary: "Gives every NFT its own smart contract account. NFTs can own assets, interact with dApps, and have on-chain identity — turning NFTs into programmable agents.",
+    useCases: [
+      "NFTs that own other assets",
+      "On-chain character profiles for games",
+      "Composable NFT bundles",
+      "NFT-based identity",
+    ],
+    buildExamples: [
+      "RPG characters that own inventory as NFTs",
+      "NFT profile with owned assets and history",
+      "Composable art pieces (NFTs containing NFTs)",
+      "On-chain identity system",
+    ],
+    keyFeatures: ["NFT-owned accounts", "Asset ownership", "Cross-chain compatible", "Programmable"],
+    relatedERCs: ["721", "1167"],
+  },
+  {
+    number: "4337",
+    title: "Account Abstraction",
+    category: "Account",
+    status: "Final",
+    summary: "Enables smart contract wallets without consensus-layer changes. Users get gasless transactions, social recovery, batched operations, and custom validation logic.",
+    useCases: [
+      "Gasless user onboarding",
+      "Social recovery wallets",
+      "Multi-sig wallets",
+      "Session keys for games",
+      "Batched transactions",
+    ],
+    buildExamples: [
+      "Wallet with email/social login (no seed phrase)",
+      "Gas-sponsored dApp for seamless UX",
+      "Multi-sig treasury management",
+      "Gaming wallet with session-based permissions",
+    ],
+    keyFeatures: ["Smart contract wallets", "Custom validation", "Gasless transactions", "Bundled operations"],
+    relatedERCs: ["6551"],
+  },
+  {
+    number: "1167",
+    title: "Minimal Proxy Contract",
+    category: "Utility",
+    status: "Final",
+    summary: "A gas-efficient cloning pattern. Deploy lightweight proxy contracts that delegate to a single implementation — dramatically reducing deployment costs.",
+    useCases: [
+      "Factory patterns for deploying many contracts",
+      "Cost-effective token launches",
+      "Template-based contract deployment",
+    ],
+    buildExamples: [
+      "NFT collection factory (deploy collections cheaply)",
+      "DAO factory for one-click DAO creation",
+      "Token launchpad platform",
+    ],
+    keyFeatures: ["Minimal gas", "Clone pattern", "Delegatecall", "Factory-friendly"],
+    relatedERCs: ["1967"],
+  },
+  {
+    number: "1967",
+    title: "Transparent Proxy Pattern",
+    category: "Utility",
+    status: "Final",
+    summary: "Standard for upgradeable proxy contracts. Store implementation address in a specific slot to avoid storage collisions, enabling safe contract upgrades.",
+    useCases: [
+      "Upgradeable smart contracts",
+      "Protocol versioning",
+      "Bug fix deployment without redeployment",
+    ],
+    buildExamples: [
+      "Upgradeable DeFi protocol",
+      "Versioned NFT marketplace",
+      "Governance-controlled contract upgrades",
+    ],
+    keyFeatures: ["Upgradeable", "Storage slot standard", "Proxy pattern", "Admin controls"],
+    relatedERCs: ["1167"],
+  },
+  {
+    number: "2612",
+    title: "Permit (Gasless Approvals)",
+    category: "DeFi",
+    status: "Final",
+    summary: "Adds signature-based approvals to ERC-20. Users can approve token spending via off-chain signatures — enabling gasless approval flows and better UX.",
+    useCases: [
+      "Gasless token approvals",
+      "Single-transaction swaps",
+      "Meta-transaction support",
+      "Better DeFi onboarding UX",
+    ],
+    buildExamples: [
+      "DEX with one-click swaps (no separate approval tx)",
+      "Gasless DeFi onboarding flow",
+      "Meta-transaction relayer service",
+    ],
+    keyFeatures: ["Signature-based approval", "Gasless", "EIP-712 typed data", "ERC-20 extension"],
+    relatedERCs: ["20"],
+  },
+  {
+    number: "3643",
+    title: "T-REX (Security Tokens)",
+    category: "Security",
+    status: "Final",
+    summary: "A comprehensive framework for compliant security tokens. Includes identity verification, transfer restrictions, and regulatory compliance built into the token contract.",
+    useCases: [
+      "Regulated security tokens",
+      "Real estate tokenization with compliance",
+      "Equity token offerings",
+      "Regulated fund tokens",
+    ],
+    buildExamples: [
+      "Compliant real estate investment platform",
+      "Security token exchange",
+      "Regulated equity crowdfunding platform",
+      "Tokenized bond marketplace",
+    ],
+    keyFeatures: ["KYC/AML compliance", "Transfer restrictions", "Identity registry", "Regulatory framework"],
+    relatedERCs: ["20", "735"],
+  },
+  {
+    number: "5192",
+    title: "Minimal Soulbound NFTs",
+    category: "Identity",
+    status: "Final",
+    summary: "Non-transferable NFTs (Soulbound Tokens). Once minted to an address, they cannot be transferred — ideal for identity, credentials, and reputation.",
+    useCases: [
+      "Academic credentials and diplomas",
+      "Professional certifications",
+      "Reputation scores",
+      "Proof of attendance (POAPs)",
+      "KYC verification tokens",
+    ],
+    buildExamples: [
+      "University diploma verification system",
+      "Professional certification platform",
+      "On-chain reputation system",
+      "Event attendance verification",
+    ],
+    keyFeatures: ["Non-transferable", "Identity-bound", "Minimal interface", "Soulbound"],
+    relatedERCs: ["721"],
+  },
+  {
+    number: "3525",
+    title: "Semi-Fungible Token",
+    category: "DeFi",
+    status: "Final",
+    summary: "Combines fungible and non-fungible properties with a slot mechanism. Tokens in the same slot are fungible with each other — perfect for financial instruments.",
+    useCases: [
+      "Structured financial products",
+      "Bonds with different maturity dates",
+      "Vouchers and coupons",
+      "Fractional real estate",
+    ],
+    buildExamples: [
+      "Bond issuance platform",
+      "Structured DeFi product marketplace",
+      "Voucher/coupon management system",
+      "Fractional ownership platform",
+    ],
+    keyFeatures: ["Semi-fungible", "Slot mechanism", "Value transfers", "Financial instruments"],
+    relatedERCs: ["721", "20"],
+  },
+  {
+    number: "1820",
+    title: "Pseudo-introspection Registry",
+    category: "Utility",
+    status: "Final",
+    summary: "A universal registry for contracts to register and query which interfaces they implement. Enables runtime interface detection across the entire network.",
+    useCases: [
+      "Interface detection",
+      "Plugin systems",
+      "Universal hooks",
+      "Contract compatibility checks",
+    ],
+    buildExamples: [
+      "Plugin marketplace for smart contracts",
+      "Universal contract interaction layer",
+      "Compatibility verification system",
+    ],
+    keyFeatures: ["Interface registry", "Singleton contract", "Universal detection", "Hook support"],
+    relatedERCs: ["777", "165"],
+  },
+  {
+    number: "165",
+    title: "Standard Interface Detection",
+    category: "Utility",
+    status: "Final",
+    summary: "Defines a standard method to check if a contract supports a specific interface. The foundation for composable smart contract interactions.",
+    useCases: [
+      "Contract interface verification",
+      "Safe token transfers",
+      "Plugin compatibility checking",
+      "Marketplace contract detection",
+    ],
+    buildExamples: [
+      "Multi-standard NFT marketplace",
+      "Universal token dashboard",
+      "Contract explorer tool",
+    ],
+    keyFeatures: ["supportsInterface()", "4-byte interface ID", "Lightweight", "Composability"],
+    relatedERCs: ["721", "1155"],
+  },
+];
+
+export const categories: ERCCategory[] = [
+  "Token",
+  "NFT",
+  "DeFi",
+  "Identity",
+  "Account",
+  "Security",
+  "Governance",
+  "Utility",
+  "Metadata",
+];
+
+export const categoryColors: Record<ERCCategory, string> = {
+  Token: "bg-emerald-500/15 text-emerald-400",
+  NFT: "bg-violet-500/15 text-violet-400",
+  DeFi: "bg-blue-500/15 text-blue-400",
+  Identity: "bg-amber-500/15 text-amber-400",
+  Account: "bg-cyan-500/15 text-cyan-400",
+  Security: "bg-red-500/15 text-red-400",
+  Governance: "bg-indigo-500/15 text-indigo-400",
+  Storage: "bg-teal-500/15 text-teal-400",
+  Utility: "bg-slate-500/15 text-slate-400",
+  Metadata: "bg-pink-500/15 text-pink-400",
+};
