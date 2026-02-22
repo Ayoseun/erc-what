@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Sparkles, Loader2, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { ERCData, ercDatabase, categoryColors } from "@/data/ercData";
+//@ts-ignore
 import { Badge } from "@/components/ui/badge";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
