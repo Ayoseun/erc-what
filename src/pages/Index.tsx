@@ -6,8 +6,8 @@ import ERCDetail from "@/components/ERCDetail";
 import CategoryFilter from "@/components/CategoryFilter";
 import AISearch from "@/components/AISearch";
 import CompareDrawer, { CompareBar } from "@/components/CompareDrawer";
-import StackBuilder, { StackBar } from "@/components/Stackbuilder";
-import CompatibilityMatrix from "@/components/Compatibilitymatrix";
+import StackBuilder, { StackBar } from "@/components/StackBuilder";
+import CompatibilityMatrix from "@/components/CompatibilityMatrix";
 import { Blocks, Github, Sparkles, Search, Layers, GitMerge } from "lucide-react";
 import { motion } from "framer-motion";
 
